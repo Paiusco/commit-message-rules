@@ -69,7 +69,7 @@ Felizmente, existem convenções bem estabelecidas que dizem o que um commit bem
 1. [Separe o assunto do corpo com uma linha vazia](#separate)
 1. [Limite o assunto usando até 50 caracteres](#limit-50)
 1. [Comece o assunto com letra maiúscula](#capitalize)
-1. [Não termina o assunto com um ponto final](#end)
+1. [Não termine o assunto com um ponto final](#end)
 1. [Use o tempo verbal imperativo no assunto](#imperative)
 1. [Limite a largura do corpo usando até 72 caracteres](#wrap-72)
 1. [Use o corpo para explicar *o que* e *por que* ao invés de *como*](#why-not-how)
@@ -103,29 +103,35 @@ Por exemplo:
     
     Resolves: #123
     See also: #456, #789
-### 1. Separate subject from body with a blank line
 
-From the `git commit` [manpage](https://www.kernel.org/pub/software/scm/git/docs/git-commit.html#_discussion):
+
+### 1. Separe o assunto do corpo com uma linha vazia
+
+Direto do `git commit` [manpage](https://www.kernel.org/pub/software/scm/git/docs/git-commit.html#_discussion):
+
 > Though not required, it’s a good idea to begin the commit message with a single short (less than 50 character) line summarizing the change, followed by a blank line and then a more thorough description. The text up to the first blank line in a commit message is treated as the commit title, and that title is used throughout Git. For example, Git-format-patch(1) turns a commit into email, and it uses the title on the Subject line and the rest of the commit in the body.
 
-Firstly, not every commit requires both a subject and a body. Sometimes a single line is fine, especially when the change is so simple that no further context is necessary. For example:
+Primeiramente, nem todo commit requer um assunto e um corpo. As vezes uma linha é o suficiente, especialmente quando a alteração é tão simples que nenhum contexto extra é necessário. Por exemplo:
 
     Fix typo in introduction to user guide
-Nothing more need be said; if the reader wonders what the typo was, she can simply take a look at the change itself, i.e. use `git show` or `git diff` or `git log -p`.
 
-If you’re committing something like this at the command line, it’s easy to use the `-m` option to `git commit`:
+Nada precisa ser dito; se o leitor quiser saber o que estava errado, ele pode simplesmente olhar a alteração em si (usando `git show` ou `git diff` ou `git log -p`)
+
+Se você estiver commitando algo como isso pela linha de comando, é facil usar a flag `-m` no `git commit`:
 
     $ git commit -m"Fix typo in introduction to user guide"
-However, when a commit merits a bit of explanation and context, you need to write a body. For example:
+
+Porém, quando um commit precisa de um pouco de explicação e contexto, voce precisa escrever um corpo. Por exemplo:
 
     Derezz the master control program
     
     MCP turned out to be evil and had become intent on world domination.
     This commit throws Tron's disc into MCP (causing its deresolution)
     and turns it back into a chess game.
-Commit messages with bodies are not so easy to write with the `-m` option. You’re better off writing the message in a proper text editor. If you do not already have an editor set up for use with Git at the command line, read [this section of Pro Git](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration).
 
-In any case, the separation of subject from body pays off when browsing the log. Here’s the full log entry:
+Commits com corpo não são tão simples de escrever usando a flag `-m`. É melhor escrever o commit usando um editor de texto. Se você ainda não tiver um editor configurado para o Git na linha de comando, leia [essa seção do Pro Git](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration).
+
+De qualquer jeito, a separação do assunto e do corpo vale a pena quando alguém estiver lendo o log. Aqui está o log completo:
 
     $ git log
     commit 42e769bdf4894310333942ffc5a15151222a87be
@@ -137,11 +143,11 @@ In any case, the separation of subject from body pays off when browsing the log.
      MCP turned out to be evil and had become intent on world domination.
      This commit throws Tron's disc into MCP (causing its deresolution)
      and turns it back into a chess game.
-And now `git log --oneline`, which prints out just the subject line:
+E com o `git log --oneline`, que printa só o assunto do commit:
 
     $ git log --oneline
     42e769 Derezz the master control program
-Or, `git shortlog`, which groups commits by user, again showing just the subject line for concision:
+Ou `git shortlog`, que agrupa os commits por usuário, ainda só mostrando o assunto:
 
     $ git shortlog
     Kevin Flynn (1):
@@ -157,74 +163,72 @@ Or, `git shortlog`, which groups commits by user, again showing just the subject
     
     Walter Gibbs (1):
           Introduce protoype chess program
-There are a number of other contexts in Git where the distinction between subject line and body kicks in—but none of them work properly without the blank line in between.
-### 2. Limit the subject line to 50 characters
+Há varios outros contextos em Git que a distinção entre assunto e corpo aparece - mas em nenhum caso eles funcionam sem uma linha de separação no meio.
 
-50 characters is not a hard limit, just a rule of thumb. Keeping subject lines at this length ensures that they are readable, and forces the author to think for a moment about the most concise way to explain what’s going on.
->*Tip: If you’re having a hard time summarizing, you might be committing too many changes at once. Strive for [atomic commits](https://www.freshconsulting.com/atomic-commits/) (a topic for a separate post).*
+### 2. Limite o assunto usando até 50 caracteres
 
-GitHub’s UI is fully aware of these conventions. It will warn you if you go past the 50 character limit:
+50 caracteres não é uma obrigação, apenas uma (//TODO) rule of thumb. Manter o assunto com esse tamanho garante que será legível, e força o autor a pensar duas vezes em como ser mais conciso em explicar o que está acontecendo.
+>*Dica: Se você está sofrendo para resumir, você provavelmente está commitando muitas alterações de uma vez só. Foque em commits atomicos (um tópico para um post separado)*
+
+A interface do Github sabe sobre essas convenções. Ela irá te avisar se você passar dos 50 caracteres:
 
 <figure class="kg-card kg-image-card">![gh1](https://i.imgur.com/zyBU2l6.png)</figure>
 
-And will truncate any subject line longer than 72 characters with an ellipsis:
+E irá truncar qualquer assunto maior que 72 caracteres:
 
 <figure class="kg-card kg-image-card">![gh2](https://i.imgur.com/27n9O8y.png)</figure>
 
-So shoot for 50 characters, but consider 72 the hard limit.
-### 3. Capitalize the subject line
+Então mire em 50 caracteres, mas considere 72 o máximo possível.
 
-This is as simple as it sounds. Begin all subject lines with a capital letter.
+### 3. Comece o assunto com letra maiúscula
 
-For example:
+Este é simples como parece. Comece o assunto com letra maiúscula.
+Por exemplo:
 
-- Accelerate to 88 miles per hour
+- Acelere a 100 quilometros por hora
 
-Instead of:
+Ao invés de:
 
-- <s>accelerate to 88 miles per hour</s>
+- <s>acelere a 100 quilometros por hora</s>
 
-### 4. Do not end the subject line with a period
+### 4. Não termine o assunto com um ponto final
 
-Trailing punctuation is unnecessary in subject lines. Besides, space is precious when you’re trying to keep them to [50 chars or less](https://cbea.ms/posts/git-commit/#limit-50).
+Ponto final é desnecessãrio no assunto. Além disso, o espaço é precioso quando você está tentando manter o assunto com [50 caracteres ou menos](https://cbea.ms/posts/git-commit/#limit-50)//TODO.
 
-Example:
+Exemplo:
+- Abra a porta devagar
 
-- Open the pod bay doors
+Ao invés de :
+- <s>Abra a porta devagar.</s>
 
-Instead of:
+### 5. Use o tempo verbal imperativo no assunto
 
-- <s>Open the pod bay doors.</s>
+*Modo imperativo* apenas significa "fale ou escreva como se estivesse dando um comando ou instrução". Alguns exemplos:
 
-### 5. Use the imperative mood in the subject line
+- Limpe o quarto
+- Feche a porta
+- Tire o lixo
 
-*Imperative mood* just means “spoken or written as if giving a command or instruction”. A few examples:
+Cada uma das sete regras que você está lendo agora está escrita no modo imperativo ("Comece o assunto com letra maiúscula", etc.)
 
-- Clean your room
-- Close the door
-- Take out the trash
+O modo imperativo pode soar um pouco rude: e este é o motivo pelo qual a gente não costuma usá-lo. Mas ele é perfeito para o assunto dos commits. Uma motivo é que **o prŕoprio Git usa o modo imperativo sempre quando cria um commit por você**.
 
-Each of the seven rules you’re reading about right now are written in the imperative (“Wrap the body at 72 characters”, etc.).
-
-The imperative can sound a little rude; that’s why we don’t often use it. But it’s perfect for Git commit subject lines. One reason for this is that **Git itself uses the imperative whenever it creates a commit on your behalf**.
-
-For example, the default message created when using `git merge` reads:
+Por exemplo, a messagem padrão criado quando `git merge` é usado é:
 
     Merge branch 'myfeature'
-And when using `git revert`:
+E quando usamos `git revert`:
 
     Revert "Add the thing with the stuff"
     
     This reverts commit cc87791524aedd593cff5a74532befe7ab69ce9d.
-Or when clicking the “Merge” button on a GitHub pull request:
+Ou quando clicamos em "Merge" num Pull Request do Github:
 
     Merge pull request #123 from someuser/somebranch
-So when you write your commit messages in the imperative, you’re following Git’s own built-in conventions. For example:
+Então quando você escreve o commit no imperativo, você está seguindo a convenção interna do próprio Git. Por exemplo:
 
-- Refactor subsystem X for readability
-- Update getting started documentation
-- Remove deprecated methods
-- Release version 1.0.0
+- Refatore subsistema X para melhor legibilidade
+- Remova método deprecated
+- Release versão 1.0.0
 
 Writing this way can be a little awkward at first. We’re more used to speaking in the *indicative mood*, which is all about reporting facts. That’s why commit messages often end up reading like this:
 
