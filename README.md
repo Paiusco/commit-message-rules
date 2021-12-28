@@ -1,13 +1,16 @@
-# Tradução livre do '[How to Write a Git Commit Message](https://cbea.ms/git-commit/)' para português
-
-## Free translation of [How to Write a Git Commit Message](https://cbea.ms/git-commit/) in Brazilian Portuguese (PT-BR)
+# Como escrever um Git Commit
+## A mensagem de um commit é importante. Veja aqui como escrevê-la bem.
+---
+## Tradução livre do '[How to Write a Git Commit Message](https://cbea.ms/git-commit/)' para português
 ---
 
-//TODO: FIX IT
-[Introduction](#Introduction-why-good-commit-messages-matter) | [The Seven Rules](#seven-rules) | [Tips](#tips) 
+![git log](https://imgs.xkcd.com/comics/git_commit.png)
 
 
-## Introdução: Por quê uma boa mensagem no commit importa
+[Introdução](#introdução-por-quê-uma-boa-mensagem-no-commit-importa) | [As Sete Regras](#as-sete-regras-para-um-commit-foda) | [Dicas](#dicas) 
+
+
+## Introdução Por quê uma boa mensagem no commit importa
 
 Se você procurar em um log de algum repositório Git aleatóriamente, você provavelmente vai pensar que seus commits são mais ou menos bagunçados. Por exemplo, dê uma olhada [aqui](https://github.com/spring-projects/spring-framework/commits/e5f4b49?author=cbeams) nesses meus commits antigos no repo do Spring:
 
@@ -45,7 +48,7 @@ Se você ainda não pensou muito sobre o que faz um commit ser decente, pode ser
 
 Mas um histórico bem cuidado é uma coisa linda e bem útil. `git blame`, `revert`, `rebase`, `log`, `shortlog` e outro comandos fazem maravilha. Revisar outros commits e pull requests começa a fazer sentido, e de repente podem ser feito separadamente. Entender porque algo aconteceu meses ou anos atrás se torna não só possível mas eficiente. 
 
-O sucesso de longo prazo de um projeto está (entre outras coisas) na sua manutenabilidade(//TODO), e o mantenedor tem poucas ferramentas mais poderosas do que o log do próprio projeto. É valido usar um tempo para aprender como cuidar dele decentemente. O que pode ser demorado(//TODO) no começo passa a ser um hábito, e eventualmente uma fonte de orgulho e produtividade para todos os envolvidos.
+O sucesso de longo prazo de um projeto está (entre outras coisas) na sua manutenibilidade, e o mantenedor tem poucas ferramentas mais poderosas do que o log do próprio projeto. É valido usar um tempo para aprender como cuidar dele decentemente. O que pode ser demorado no começo passa a ser um hábito, e eventualmente uma fonte de orgulho e produtividade para todos os envolvidos.
 
 Neste post, Eu vou mostrar apenas o elemento mais básico de como manteu seu histórico de commits saudavél: como escrever uma mensagem de commit. Há outras práticas importantes como squashar commits que eu não irei cobrir aqui. Talvez eu irei escrever sobre isso no próximo post.
 
@@ -55,7 +58,7 @@ O foco de um time sobre seus commtis não devia ser diferente. Para criar um his
 
 **Estilo.** Sintaxe de marcação, quantidade de colunas, gramática, letras maiusculas/minusculas, pontuação. Deixe isso definido, sem que ninguém precise adivinhar e o faça o mais simples possível. O resultado final vai ser um log extraordinariamente consistente que não é só bom fácil de ler mas que realmente *é lido* regularmente.
 
-(//TODO)**Content.** Que tipo de informação o corpo do commit (se existir) deve conter? O que *não* deve conter?
+**Conteúdo.** Que tipo de informação o corpo do commit (se existir) deve conter? O que *não* deve conter?
 
 **Metadata.** Como deve ser o número do Pull Request, ID do issue, etc. deve ser referenciado?
 
@@ -167,7 +170,7 @@ Há varios outros contextos em Git que a distinção entre assunto e corpo apare
 
 ### 2. Limite o assunto usando até 50 caracteres
 
-50 caracteres não é uma obrigação, apenas uma (//TODO) rule of thumb. Manter o assunto com esse tamanho garante que será legível, e força o autor a pensar duas vezes em como ser mais conciso em explicar o que está acontecendo.
+50 caracteres não é uma obrigação, apenas uma regra de ouro. Manter o assunto com esse tamanho garante que será legível, e força o autor a pensar duas vezes em como ser mais conciso em explicar o que está acontecendo.
 >*Dica: Se você está sofrendo para resumir, você provavelmente está commitando muitas alterações de uma vez só. Foque em commits atomicos (um tópico para um post separado)*
 
 A interface do Github sabe sobre essas convenções. Ela irá te avisar se você passar dos 50 caracteres:
@@ -193,7 +196,7 @@ Ao invés de:
 
 ### 4. Não termine o assunto com um ponto final
 
-Ponto final é desnecessãrio no assunto. Além disso, o espaço é precioso quando você está tentando manter o assunto com [50 caracteres ou menos](https://cbea.ms/posts/git-commit/#limit-50)//TODO.
+Ponto final é desnecessário no assunto. Além disso, o espaço é precioso quando você está tentando manter o assunto com [50 caracteres ou menos](#limite-o-assunto-usando-até-50-caracteres).
 
 Exemplo:
 - Abra a porta devagar
@@ -230,49 +233,50 @@ Então quando você escreve o commit no imperativo, você está seguindo a conve
 - Remova método deprecated
 - Release versão 1.0.0
 
-Writing this way can be a little awkward at first. We’re more used to speaking in the *indicative mood*, which is all about reporting facts. That’s why commit messages often end up reading like this:
+Escrever desse jeito pode ser um pouco esquitiso no começo. Nós estamos mais acostumados a falar no *Modo indicativo*, que é como reportamos acontecimentos. É por isso que commits normalmente ficam assim:
 
 - <s>Fixed bug with Y</s>
 - <s>Changing behavior of X</s>
 
-And sometimes commit messages get written as a description of their contents:
+E as vezes os commits são escritos como uma descrição do que foi feito:
 
 - <s>More fixes for broken stuff</s>
 - <s>Sweet new API methods</s>
 
-To remove any confusion, here’s a simple rule to get it right every time.
+Para que não fique nenhuma confusão, fica aqui uma regra para que você sempre acerte.
 
-**A properly formed Git commit subject line should always be able to complete the following sentence**:
+**O assunto de um commit propriamente formatado deve sempre completar a seguinte frase**: 
 
-- If applied, this commit will *<u>your subject line here</u>*
+- Se aplicado, esse commit irá *<u>insira seu assunto aqui</u>*
 
-For example:
+Por exemplo:
 
-- If applied, this commit will *refactor subsystem X for readability*
-- If applied, this commit will *update getting started documentation*
-- If applied, this commit will *remove deprecated methods*
-- If applied, this commit will *release version 1.0.0*
-- If applied, this commit will *merge pull request #123 from user/branch*
+- Se aplicado, esse commit irá *refactor subsystem X for readability*
+- Se aplicado, esse commit irá *update getting started documentation*
+- Se aplicado, esse commit irá *remove deprecated methods*
+- Se aplicado, esse commit irá *release version 1.0.0*
+- Se aplicado, esse commit irá *merge pull request #123 from user/branch*
 
-Notice how this doesn’t work for the other non-imperative forms:
+Perceba que isso não funciona para as formas não-imperativas:
 
-- If applied, this commit will *<s>fixed bug with Y</s>*
-- If applied, this commit will *<s>changing behavior of X</s>*
-- If applied, this commit will *<s>more fixes for broken stuff</s>*
-- If applied, this commit will *<s>sweet new API methods</s>*
+- Se aplicado, esse commit irá *<s>fixed bug with Y</s>*
+- Se aplicado, esse commit irá *<s>changing behavior of X</s>*
+- Se aplicado, esse commit irá *<s>more fixes for broken stuff</s>*
+- Se aplicado, esse commit irá *<s>sweet new API methods</s>*
 
->*Remember: Use of the imperative is important only in the subject line. You can relax this restriction when you’re writing the body.*
+>*Lembre-se: O uso do modo imperativo é importante apenas para o assunto. Você pode relaxar esta restrição quando estiver escrevendo o corpo.*
 
-### 6. Wrap the body at 72 characters
+### 6. Limite a largura do corpo usando até 72 caracteres
 
-Git never wraps text automatically. When you write the body of a commit message, you must mind its right margin, and wrap text manually.
+Git nunca pula linha automaticamente. Quando você escreve o corpo de um commit, você deve considerar o tamanho da margem, e pular linha manualmente.
 
-The recommendation is to do this at 72 characters, so that Git has plenty of room to indent text while still keeping everything under 80 characters overall.
+A recomendação é para fazer isso em 72 caracteres, para que o Git tenha espaço suficiente para identar o texto enquanto ainda não ultrapassa os 80 caracteres totais.
 
-A good text editor can help here. It’s easy to configure Vim, for example, to wrap text at 72 characters when you’re writing a Git commit. Traditionally, however, IDEs have been terrible at providing smart support for text wrapping in commit messages (although in recent versions, IntelliJ IDEA has [finally](https://youtrack.jetbrains.com/issue/IDEA-53615) [gotten](https://youtrack.jetbrains.com/issue/IDEA-53615#comment=27-448299) [better](https://youtrack.jetbrains.com/issue/IDEA-53615#comment=27-446912) about this).
-### 7. Use the body to explain what and why vs. how
+Um bom editor de texto pode ajudar aqui. É fácil de configurar o Vim, por exemplo, para pular linha em 72 caracteres quando você estiver escrevendo um commit. Tradicionalmente, porém, as IDEs são terríves em prover um suporte decente para formatar commits (Mas em versões mais recentes, IntelliJ IDE [finalmente](https://youtrack.jetbrains.com/issue/IDEA-53615) [melhorou](https://youtrack.jetbrains.com/issue/IDEA-53615#comment=27-448299) [bastante](https://youtrack.jetbrains.com/issue/IDEA-53615#comment=27-446912) neste contexto)
 
-This [commit from Bitcoin Core](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6) is a great example of explaining what changed and why:
+### 7. Use o corpo para explicar *o que* e *por que* ao invés de *como* 
+
+Esse [commit do Bitcoin Core](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6) é bom ótimo exemplo de como explicar o que mudou e porque:
 
     commit eb0b56b19017ab5c16c745e6da39c53126924ed6
     Author: Pieter Wuille &lt;pieter.wuille@gmail.com&gt;
@@ -295,22 +299,26 @@ This [commit from Bitcoin Core](https://github.com/bitcoin/bitcoin/commit/eb0b56
     
        fail(), clear(n) and exceptions() are just never called. Delete
        them.
-Take a look at the [full diff](https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6) and just think how much time the author is saving fellow and future committers by taking the time to provide this context here and now. If he didn’t, it would probably be lost forever.
 
-In most cases, you can leave out details about how a change has been made. Code is generally self-explanatory in this regard (and if the code is so complex that it needs to be explained in prose, that’s what source comments are for). Just focus on making clear the reasons why you made the change in the first place—the way things worked before the change (and what was wrong with that), the way they work now, and why you decided to solve it the way you did.
+Dê uma olhada no [diff completo]() e pense quanto tempo o autor está economizando de futuros desenvolvedores por ter tido o tempo de prover todo o contexto neste commit. Se ele não tivesse o feito, provavelmente o contexto teria se perdido para sempre
 
-The future maintainer that thanks you may be yourself!
-## Tips
-### Learn to love the command line. Leave the IDE behind.
-For as many reasons as there are Git subcommands, it’s wise to embrace the command line. Git is insanely powerful; IDEs are too, but each in different ways. I use an IDE every day (IntelliJ IDEA) and have used others extensively (Eclipse), but I have never seen IDE integration for Git that could begin to match the ease and power of the command line (once you know it).
+Na maioria dos casos, você pode deixar de lado os detalhes de como uma alteração foi feita. O código é geralmente auto explicativo (e se ele for tão complexo que precisa de uma melhor explicação, você pode comentar dentro do próprio código). Apenas foque em deixa claro os motivos porque você fez a mudança em primeiro lugar-como aquilo funcionava antes da alteração (e os problemas disso), o jeito que funciona agora, e porque você decidiu resolver daquele jeito.
 
-Certain Git-related IDE functions are invaluable, like calling `git rm` when you delete a file, and doing the right stuff with `git` when you rename one. Where everything falls apart is when you start trying to commit, merge, rebase, or do sophisticated history analysis through the IDE.
+O próximo mantenedor que irá te agradecer pode ser você mesmo
 
-When it comes to wielding the full power of Git, it’s command-line all the way.
+## Dicas
+### Aprenda a amar a linha de commando. Deixe a IDE para trás.
 
-Remember that whether you use Bash or Zsh or Powershell, there are [tab](https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash) [completion](https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh) [scripts](https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-PowerShell) that take much of the pain out of remembering the subcommands and switches.
-### Read Pro Git
-The [Pro Git](https://git-scm.com/book/en/v2) book is available online for free, and it’s fantastic. Take advantage!
+Por tantas razões quantas existem Git subcommands, é aconselhavel adotar a linha de commando. Git é incrivelmente poderoso; IDEs também são, mas cada uma de um jeito diferente. Eu uso IDE todo dia (IntelliJ IDEA) e eu já usei outras extensivamente, mas eu nunca vi uma extensão de IDE para Git que conseguisse chegar perto da facilidade e poder da linha de commando (desde que você saiba usá-la).
+
+Certamente as funções de IDEs acopladas ao Git são inestimavéis, como chamar `git rm`quando você deleta um arquivo, e a coisa certa com `git` quando você renomeia um. Onde tudo começa a se perder é quando você tenta usar commit, merge, rebase, ou fazer alguma análise sofisticada de histórico pela IDE.
+
+Quando se trata de usar todo o poder do Git, é sempre a linha de comando.
+
+Lembre-se que se você usa Bash ou Zsh ou Powershell, existem [tab](https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Bash) [completion](https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh) [scripts](https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-PowerShell) que tira muito da dor de ter de se lembrar dos subcomandos e switches. 
+
+## Leia Pro Git
+O livro [Pro Git](https://git-scm.com/book/en/v2) está disponível online gratuitamente e é fantástico. Aproveite! 
 
 *header image credit: [xkcd](https://xkcd.com/1296/)*
 - - -
